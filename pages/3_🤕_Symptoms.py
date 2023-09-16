@@ -1,5 +1,6 @@
 import streamlit as st
 from components import sidebar
+from services import prompts
 
 st.set_page_config(
     page_title="Symptoms",
@@ -10,3 +11,6 @@ st.set_page_config(
 sidebar.display()
 
 st.markdown("# Plotting Demo")
+
+
+prompts.initialRole()
