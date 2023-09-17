@@ -28,9 +28,10 @@ async def generate_response(messages):
     except Exception as e:
         yield f"EXCEPTION {str(e)}"
 
-async def run_conversation(messages, message_placeholder):
+async def run_conversation(messages, message_placeholder, markdown = True):
     full_response = ""
-    message_placeholder.markdown("Thinking...")
+    if markdown:
+        message_placeholder.markdown("Thinking...")
     chunks = generate_response(messages)
     chunk = await anext(chunks, "END OF CHAT")
     while chunk != "END OF CHAT":
@@ -38,9 +39,11 @@ async def run_conversation(messages, message_placeholder):
             full_response = ":red[We are having trouble generating advice.  Please wait a minute and try again.]"
             break
         full_response = full_response + chunk
-        message_placeholder.markdown(full_response + "▌")
+        if markdown:
+            message_placeholder.markdown(full_response + "▌")
         chunk = await anext(chunks, "END OF CHAT")
-    message_placeholder.markdown(full_response)
+    if markdown:
+        message_placeholder.markdown(full_response)
     messages.append({"role": "assistant", "content": full_response})
     return messages
 

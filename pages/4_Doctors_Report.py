@@ -72,7 +72,7 @@ with st.expander("AI Suggestions", expanded=True):
     st.session_state.messages = messages
     st.markdown(f"### Key Valuable Insights")
     advice = st.empty()
-    if st.session_state.report == "" and len(st.session_state.messages) > 1:
+    if st.session_state.report == "" and len(st.session_state.messages) > 2:
         report = asyncio.run((llm.run_conversation([{"role": "system", "content": prompts.doctorInsightPrompt(st.session_state)}], advice)))
         st.session_state.report = report[1]['content']
     else:
@@ -88,6 +88,7 @@ with st.expander("Patient Vitals"):
     dataframe,
     x = 'Date',
     y = st.session_state.y)
+
 with st.expander("Medical and Family History"):
     st.markdown(f"**Patient:** {st.session_state.name}")
     st.write(f"**Age:** {st.session_state.age}")

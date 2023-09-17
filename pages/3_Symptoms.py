@@ -73,10 +73,6 @@ if "sibling_conditions" not in st.session_state:
     st.session_state.sibling_conditions = []
 if "grandparent_conditions" not in st.session_state:
     st.session_state.grandparent_conditions = []
-if 'messages' not in st.session_state:
-    st.session_state['messages'] = [
-        {"role": "system", "content": prompts.startPrompt()}
-    ]
 if "report" not in st.session_state:
     st.session_state.report = ""
 
@@ -91,7 +87,6 @@ st.session_state.meds =  st.session_state.meds
 st.session_state.parent_conditions = st.session_state.parent_conditions
 st.session_state.sibling_conditions = st.session_state.sibling_conditions
 st.session_state.grandparent_conditions = st.session_state.grandparent_conditions
-st.session_state.messages = st.session_state.messages
 st.session_state.report = st.session_state.report
 
 
@@ -100,32 +95,8 @@ sidebar.display()
 clear_button = st.sidebar.button("Clear Conversation", key="clear")
 share_button = st.sidebar.button("Share Data with Doctor", key="share")
 
-st.markdown("<h1 style='text-align: center;'>Chatbox to share your symptoms.</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Hello</h1>", unsafe_allow_html=True)
 
-# Initialise session state variables
-if 'messages' not in st.session_state:
-    st.session_state['messages'] = [
-        {"role": "system", "content": prompts.startPrompt()}
-    ]
-# reset everything
-if clear_button:
-    st.session_state['messages'] = [
-        {"role": "system", "content": prompts.startPrompt()}
-    ]
-
-# Print all messages in the session state
-for message in [m for m in st.session_state.messages if m["role"] != "system"]:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
-if share_button:
-    with st.spinner('Sharing symptoms and health trends with doctor...'):
-        time.sleep(2)
-        st.success("""
-                   Sent! Your doctor has received a full-report of the symptoms we just discussed 
-                   together as well as a copy of your medical records and your Apple Health data trends 
-                   over the past two weeks. You will receive an email shortly confirming your doctor appointment. ')
-        """)
 # Chat with the LLM, and update the messages list with the response, updating UI
 async def chat(messages):
     with st.chat_message("user"):
@@ -137,11 +108,46 @@ async def chat(messages):
         st.session_state.messages = messages
     return messages
 
+# Initialise session state variables
+if 'messages' not in st.session_state or len(st.session_state.messages) < 2:
+    st.session_state['messages'] = [
+        {"role": "system", "content": prompts.startPrompt()}
+    ]
+
+    with st.chat_message("assistant"):
+        message_placeholder = st.empty()
+        st.session_state.messages.append({"role": "user", "content": "Hello!"})
+        messages = asyncio.run(llm.run_conversation(st.session_state.messages, message_placeholder))
+        st.session_state.messages = messages
+
+
+# reset everything
+if clear_button:
+    st.session_state['messages'] = [
+        {"role": "system", "content": prompts.startPrompt()}
+    ]
+
+# Print all messages in the session state
+for message in [m for m in st.session_state.messages if m["role"] != "system"][2:]:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+
+if share_button:
+    with st.spinner('Sharing symptoms and health trends with doctor...'):
+        time.sleep(2)
+        st.success("""
+                   Sent! Your doctor has received a full-report of the symptoms we just discussed 
+                   together as well as a copy of your medical records and your Apple Health data trends 
+                   over the past two weeks. You will receive an email shortly confirming your doctor appointment. ')
+        """)
+
+
 # React to the user prompt
 if prompt := st.chat_input("How are you feeling today?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     asyncio.run(chat(st.session_state.messages))
-# st.write(st.session_state)
+st.write(st.session_state)
 
 
 
