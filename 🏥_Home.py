@@ -9,7 +9,9 @@ st.set_page_config(
 	layout="wide"
 )
 
+current_script_directory = os.path.dirname(os.path.abspath(__file__))
 logo_relative_path = "static/Logo_Redone.png"
+image_path = os.path.join(current_script_directory, logo_relative_path)
 
 # Define the HTML and CSS
 html_code = """
@@ -117,7 +119,7 @@ html_code = """
   </div>
 
   <!-- Add an image with the <img> tag -->
-  <img src=logo_relative_path alt="Panacea Logo" style="display: block; margin: 20px auto; max-width: 100%; height: auto;">
+  <img src=image_path alt="Panacea Logo" style="display: block; margin: 20px auto; max-width: 100%; height: auto;">
 
   <div class="subheading center">
     An AI Designed Specifically to Help You.
