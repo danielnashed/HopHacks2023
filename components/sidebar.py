@@ -18,3 +18,6 @@ def display():
         if reload_button:
             st.session_state.clear()
             st.experimental_rerun()
+
+
+            

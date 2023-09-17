@@ -159,8 +159,8 @@ html_rest_of_content = """
 st.markdown(html_first_line, unsafe_allow_html=True)
 
 #Display the panacea logo
+st.image(os.path.join("static","Logo_Redone.png"), unsafe_allow_html=True)
 
-st.image(os.path.join("static","Logo_Redone.png"))
 
 #Display the rest of the content HTML
 st.markdown(html_rest_of_content, unsafe_allow_html=True)

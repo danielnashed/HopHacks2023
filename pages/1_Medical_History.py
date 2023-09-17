@@ -14,21 +14,35 @@ st.set_page_config(
 sidebar.display()
 
 
-#THIS MODIFIES TEXT BOXES
+#THIS CSS MODIFIES THE COLOR OF TEXT BOXES
 st.markdown("""
     <style>
     .stTextArea [data-baseweb=base-input] {
         background-color: #080808;
         color: white;
     }
-
-    .stTextArea [data-baseweb=base-input] [disabled=""] {
+            
+    .stTextInput [data-baseweb=base-input] {
         background-color: #080808;
-        color: gray;
+        color: white;
+    }
+            
+    .stDateInput [data-baseweb=base-input] {
+        background-color: #080808;
+        color: white;
+    }
+    
+    .stNumberInput [data-baseweb=base-input] {
+        background-color: #080808;
+        color: white;
+    }
+            
+    div[data-baseweb="select"] > div {
+        background-color: #080808;
+        color: white;
     }
     </style>
     """, unsafe_allow_html=True)
-#THIS MODIFIES TEXT BOXES
 
 
 st.markdown("# Known Medical Conditions")
