@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 from components import sidebar
-import os, base64, cv2
+import os
 
 st.set_page_config(
 	page_title="Home",
