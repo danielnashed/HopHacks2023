@@ -13,6 +13,24 @@ st.set_page_config(
 
 sidebar.display()
 
+
+#THIS MODIFIES TEXT BOXES
+st.markdown("""
+    <style>
+    .stTextArea [data-baseweb=base-input] {
+        background-color: #080808;
+        color: white;
+    }
+
+    .stTextArea [data-baseweb=base-input] [disabled=""] {
+        background-color: #080808;
+        color: gray;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+#THIS MODIFIES TEXT BOXES
+
+
 st.markdown("# Known Medical Conditions")
 
 # If session state does not have the medical history keys, initialize them
