@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 from components import sidebar
-import os
+import os, base64, cv2
 
 st.set_page_config(
 	page_title="Home",
@@ -158,11 +158,18 @@ html_rest_of_content = """
 #Display the first line HTML
 st.markdown(html_first_line, unsafe_allow_html=True)
 
-#Display the panacea logo
-st.image(os.path.join("static","Logo_Redone.png"))
+#Use the centered div class with st.image to display the panacea logo
+col1, col2, col3 = st.columns([1,6,1])
 
+# Leave the first column empty
+col1.write("")
 
-#Display the rest of the content HTML
+# Display the image in the second column
+st.image(os.path.join("static","Logo_Redone.png"), use_column_width=True)
+
+# Leave the third column empty
+col3.write("")
+
 st.markdown(html_rest_of_content, unsafe_allow_html=True)
 
 # Define the key features and their descriptions
@@ -179,16 +186,3 @@ for feature, description in features.items():
     st.write(f"- <span class='definition'>{feature}</span>: {description}</br><div class='tooltip'>{description}</div>", unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
-
-# Define the file path
-file_path = os.path.join('pages', '1_Medical_History.py')
-
-# Create a button that redirects to the file_path
-redirect_button = f"""
-    <button onclick="window.location.href='{file_path}'" 
-        style="color: white; background-color: #E01A4F; font-size: 20px; font-family: monospace; padding: 10px 20px; text-align: center; display: block; margin: 0 auto; cursor: pointer;">
-        Try It
-    </button>
-"""
-
-st.markdown(redirect_button, unsafe_allow_html=True)
