@@ -39,5 +39,4 @@ with st.form(key="family_med_form"):
     # Submit button
     submit = st.form_submit_button("Submit")
     if submit:
-        st.write("Form Submitted!")
-
+        st.write("## Form Submitted!")
