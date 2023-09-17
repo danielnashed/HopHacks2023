@@ -40,7 +40,7 @@ html_rest_of_content = """
 
     .subheading {
       font-size: 60px; /* Almost as big as the title */
-      text-align: center;
+      text-align: left;
     }
 
     .body-heading1 {
