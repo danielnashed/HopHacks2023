@@ -4,6 +4,7 @@ import streamlit as st
 import pandas as pd
 import datetime
 import os
+from components import sidebar
 import datetime
 if "name" not in st.session_state:
     st.session_state.name = ""
@@ -45,8 +46,9 @@ st.session_state.grandparent_conditions = st.session_state.grandparent_condition
 st.session_state.messages = st.session_state.messages
 
 
+sidebar.display()
 
-st.title("Dashboard")
+st.title("Overview")
 
 if 'y' not in st.session_state:
     st.session_state.y = []

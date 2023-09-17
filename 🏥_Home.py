@@ -8,7 +8,7 @@ st.set_page_config(
 	page_icon="🏥",
 	layout="wide"
 )
-print(st.session_state)
+
 # ⚕ 
 sidebar.display()
 # Header Section
