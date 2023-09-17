@@ -95,7 +95,7 @@ sidebar.display()
 clear_button = st.sidebar.button("Clear Conversation", key="clear")
 share_button = st.sidebar.button("Share Data with Doctor", key="share")
 
-st.markdown("<h1 style='text-align: center;'>Hello</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Welcome to Panacea AI</h1>", unsafe_allow_html=True)
 
 # Chat with the LLM, and update the messages list with the response, updating UI
 async def chat(messages):
@@ -147,7 +147,7 @@ if share_button:
 if prompt := st.chat_input("How are you feeling today?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     asyncio.run(chat(st.session_state.messages))
-st.write(st.session_state)
+# st.write(st.session_state)
 
 
 
