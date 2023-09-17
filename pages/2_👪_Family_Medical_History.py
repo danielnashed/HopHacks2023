@@ -71,15 +71,15 @@ st.markdown("# Known Family Medical History")
 with st.form(key="family_med_form"):
 
     st.write("Medical Conditions in Parents:")
-    st.multiselect(label="parent_conditions", options=medicalForm.medical_conditions(), default=st.session_state.parent_conditions, key="parent_conditions",
+    st.multiselect(label="Parent Conditions", options=medicalForm.medical_conditions(), default=st.session_state.parent_conditions, key="parent_conditions",
                    placeholder="Known parent medical conditions")
 
     st.write("Medical Conditions in Siblings:")
-    st.multiselect(label="sibling_conditions", options=medicalForm.medical_conditions(), default=st.session_state.sibling_conditions, key="sibling_conditions",
+    st.multiselect(label="Sibling Conditions", options=medicalForm.medical_conditions(), default=st.session_state.sibling_conditions, key="sibling_conditions",
                    placeholder="Known sibling medical conditions")
 
     st.write("Medical Conditions in Grandparents:")
-    st.multiselect(label="grandparent_conditions", options=medicalForm.medical_conditions(), default=st.session_state.grandparent_conditions, key="grandparent_conditions",
+    st.multiselect(label="Grandparent Conditions", options=medicalForm.medical_conditions(), default=st.session_state.grandparent_conditions, key="grandparent_conditions",
                    placeholder="Known grandparent medical conditions")
     # Submit button
     submit = st.form_submit_button("Submit")
