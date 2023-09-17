@@ -1,6 +1,7 @@
 import streamlit as st
 from PIL import Image
 from components import sidebar
+import os
 
 st.set_page_config(
 	page_title="Home",
@@ -13,7 +14,8 @@ sidebar.display()
 # Header Section
 st.title("Welcome to Panacea, Your Personal Medical Assistant")
 #st.write("Transforming Healthcare with Advanced AI")
-st.image("Logo.png", width= 1000)
+filePath = os.path.join("static","Logo.png")
+st.image(filePath, width= 1000)
 
 # Banner Section
 #st.image("medical_professional_image.jpg", use_container_width=True)
