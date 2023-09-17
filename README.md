@@ -1,42 +1,51 @@
 # HopHacks2023
 
-Simple overview of use/purpose.
+In today's healthcare landscape, the synergy between doctors and patients often encounters inefficiencies and delays. 
+Despite advancements, the rate of diagnostic inaccuracies remains disconcertingly consistent, compromising patient 
+outcomes. These diagnostic challenges arise primarily from two interconnected issues: the scarcity of comprehensive 
+patient data available to doctors and the burdensome demands on already stretched medical teams.
 
-## Description
-
-An in-depth paragraph about your project and overview of use.
+These overlapping challenges diminish the richness of patient-doctor interactions during clinical visits. This is where 
+our pioneering app comes into play. Our platform empowers patients by enabling them to interact with an AI-driven chatbot 
+that comprehensively assesses their symptoms. Integrated seamlessly with the Apple iPhone and Apple Watch Health Apps, 
+it harnesses real-time health metrics, ensuring a holistic understanding of a patient's wellbeing. By sharing this 
+comprehensive health snapshot with their healthcare providers before appointments, patients can enrich their 
+consultations, providing a foundation for more informed decisions. The result? Improved diagnostic precision, more 
+efficient patient-doctor dialogues, and a notable reduction in healthcare costs.
 
 ## Getting Started
 
 ### Dependencies
-
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* Please refer to the requirements.txt file for all dependencies
 
 ### Installing
+If running locally, ensure that you have all items installed from requirements.txt installed
+within your virtual environment.
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+You will need to add a .env file to the root directory with the following variables:
+* OPENAI_API_MODEL
+* OPENAI_API_KEY
 
-### Executing program
+From the root directory, run the following command:
+`streamlit run Home.py`
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+Navigate to the localhost link provided in the terminal to view the application.
+
+If running via share.streamlit.io, simply navigate to the following link: <INSERT LINK HERE>
+
 
 ## Authors
 
 Contributors names and contact info
 
-William Kourafas 
-[@Controversy7]
+William Kourafas [Git: controversy7]
+
+Jonathan Samuel [Git: samuelJon17]
+
+Maria Valverde [Git: mvalver2]
+
+Daniel Nashed [Git: danielnashed]
 
 ## Version History
 
-* 
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+* Initial Release: September 17, 2023

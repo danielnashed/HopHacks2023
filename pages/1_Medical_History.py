@@ -2,9 +2,7 @@ import datetime
 import streamlit as st
 from components import sidebar
 from services import medicalForm
-from services import prompts
 
-## PROBLEM LATER -- FIGURE OUT HOW TO NOT UPDATE SESSION STATE WHEN USER CLICKS SUBMIT
 st.set_page_config(
     page_title="Medical History",
     # page_icon="🧑",

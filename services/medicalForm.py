@@ -1,4 +1,3 @@
-
 def medical_conditions():
     return ["Alzheimer’s Disease", "Arthritis", "Asthma", "Atrial Fibrillation",
             "Autism Spectrum Disorders", "Cancer", "Chronic Kidney Disease",
