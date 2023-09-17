@@ -6,6 +6,10 @@ import datetime
 import os
 from components import sidebar
 import datetime
+from services import llm
+from services import prompts
+import asyncio
+
 if "name" not in st.session_state:
     st.session_state.name = ""
 if "age" not in st.session_state:
@@ -54,8 +58,6 @@ if 'y' not in st.session_state:
     st.session_state.y = []
 
 
-
-
 with st.expander("Patient Vitals"):
     path = os.path.join("data","healthkit_data.csv")
     print(os.path.exists(path))
@@ -80,8 +82,11 @@ with st.expander("Medical and Family History"):
     st.write(f"**Grandparents Medical Conditions:** {', '.join(st.session_state.grandparent_conditions)}")
 
 with st.expander("AI Suggestions"):
-    st.write("Not finished yet")
-    
+    st.markdown(f"### Key Valuable Insights")
+    advice = st.empty()
+    asyncio.run((llm.run_conversation([{"role": "system", "content": prompts.doctorInsightPrompt()}], advice)))
+#
+# await run_conversation([{"role": "user", "content": user_prompt}], message_placeholder)
 
 with st.expander("Diagnoses/ Comments"):
     d = st.date_input("Date: ", datetime.datetime.now())

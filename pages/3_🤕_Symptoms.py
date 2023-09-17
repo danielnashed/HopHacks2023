@@ -1,7 +1,4 @@
-import openai
-import os
 import streamlit as st
-# from streamlit_chat import message
 from components import sidebar
 from services import prompts
 import asyncio
@@ -61,8 +58,6 @@ st.session_state.grandparent_conditions = st.session_state.grandparent_condition
 st.session_state.messages = st.session_state.messages
 
 
-
-
 # Sidebar - let user clear the current conversation
 sidebar.display()
 clear_button = st.sidebar.button("Clear Conversation", key="clear")
@@ -79,7 +74,6 @@ if clear_button:
     st.session_state['messages'] = [
         {"role": "system", "content": prompts.startPrompt()}
     ]
-
 
 # Print all messages in the session state
 for message in [m for m in st.session_state.messages if m["role"] != "system"]:
