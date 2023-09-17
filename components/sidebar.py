@@ -7,7 +7,7 @@ def display():
             <a href="/" style="color:black;text-decoration: none;">
                 <div style="display:table;margin-top:-16rem;margin-left:0%;">
                     <img src="/app/static/logo.png" width="30"><span>Medical Assistant</span>
-                    <span style="font-size: 0.8em; color: grey">&nbsp;&nbsp;v0.1.0</span>
+                    <span style="font-size: 0.8em; color: #080808">&nbsp;&nbsp;v0.1.0</span>
                     <br>
                     <span style="font-size: 0.8em">Welcome to Medical Assistant NAME CHANGE LATER</span>
                 </div>
@@ -20,3 +20,6 @@ def display():
         if reload_button:
             st.session_state.clear()
             st.experimental_rerun()
+
+
+            

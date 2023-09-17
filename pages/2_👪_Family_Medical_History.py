@@ -12,6 +12,36 @@ st.set_page_config(
     layout="wide"
 )
 
+#THIS CSS MODIFIES THE COLOR OF TEXT BOXES
+st.markdown("""
+    <style>
+    .stTextArea [data-baseweb=base-input] {
+        background-color: #080808;
+        color: white;
+    }
+            
+    .stTextInput [data-baseweb=base-input] {
+        background-color: #080808;
+        color: white;
+    }
+            
+    .stDateInput [data-baseweb=base-input] {
+        background-color: #080808;
+        color: white;
+    }
+    
+    .stNumberInput [data-baseweb=base-input] {
+        background-color: #080808;
+        color: white;
+    }
+            
+    div[data-baseweb="select"] > div {
+        background-color: #080808;
+        color: white;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 if "name" not in st.session_state:
     st.session_state.name = ""
 if "age" not in st.session_state:
