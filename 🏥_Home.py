@@ -9,12 +9,8 @@ st.set_page_config(
 	layout="wide"
 )
 
-current_script_directory = os.path.dirname(os.path.abspath(__file__))
-logo_relative_path = "static/Logo_Redone.png"
-image_path = os.path.join(current_script_directory, logo_relative_path)
-
-# Define the HTML and CSS
-html_code = """
+# Define the HTML and CSS for the first line
+html_first_line = """
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,10 +22,20 @@ html_code = """
       text-align: center;
       color: white;
     }
+  </style>
+</head>
+<body>
+  <!-- HTML Content for the first line -->
+  <div class="title center">
+    <span>Hello. I am</span>
+  </div>
+"""
 
-    .title span {
-      color: orange; /* Word Panacea in orange */
-    }
+# Define the HTML and CSS for the rest of the content
+html_rest_of_content = """
+<head>
+  <style>
+    /* CSS Styles */
 
     .subheading {
       font-size: 60px; /* Almost as big as the title */
@@ -112,15 +118,7 @@ html_code = """
     }
   </style>
 </head>
-<body>
-  <!-- HTML Content -->
-  <div class="title center">
-    <span>Hello. I am </span><span class="title">Panacea.</span>
-  </div>
-
-  <!-- Add an image with the <img> tag -->
-  <img src=image_path alt="Panacea Logo" style="display: block; margin: 20px auto; max-width: 100%; height: auto;">
-
+  <!-- Rest of your HTML content (subheading, body text, etc.) -->
   <div class="subheading center">
     An AI Designed Specifically to Help You.
   </div><br>
@@ -156,8 +154,14 @@ html_code = """
 </html>
 """
 
-# Display the HTML
-st.markdown(html_code, unsafe_allow_html=True)
+#Display the first line HTML
+st.markdown(html_first_line, unsafe_allow_html=True)
+
+#Display the panacea logo
+st.image("static\Logo_Redone.png") 
+
+#Display the rest of the content HTML
+st.markdown(html_rest_of_content, unsafe_allow_html=True)
 
 # Define the key features and their descriptions
 features = {
