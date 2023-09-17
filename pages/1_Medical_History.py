@@ -111,4 +111,4 @@ with st.form("medical_history_form"):
     if submit:
         st.markdown("## Form Submitted!")
 
-# st.write(st.session_state)
+
