@@ -42,6 +42,8 @@ if 'messages' not in st.session_state:
     st.session_state['messages'] = [
         {"role": "system", "content": prompts.startPrompt()}
     ]
+if "report" not in st.session_state:
+    st.session_state.report = ""
 st.session_state.name = st.session_state.name
 st.session_state.age = st.session_state.age
 st.session_state.dob = st.session_state.dob
@@ -54,12 +56,15 @@ st.session_state.parent_conditions = st.session_state.parent_conditions
 st.session_state.sibling_conditions = st.session_state.sibling_conditions
 st.session_state.grandparent_conditions = st.session_state.grandparent_conditions
 st.session_state.messages = st.session_state.messages
+st.session_state.report = st.session_state.report
 
 # Form
 with st.form("medical_history_form"):
     st.text_input("Full Name:", value=st.session_state.name, key="name")
     st.number_input("Age:", value=st.session_state.age, key="age", min_value=0, max_value=150, step=1)
-    st.date_input("Date of Birth:", value=st.session_state.dob, key="dob", format="MM/DD/YYYY")
+    st.date_input("Date of Birth:", value=st.session_state.dob, key="dob", format="MM/DD/YYYY",
+                  min_value=datetime.date.today()-datetime.timedelta(days=100*365.25),
+                  max_value=datetime.date.today()+datetime.timedelta(days=100*365.25))
    # st.radio("Gender: ", options=["Male", "Female", "Other", "Prefer not to say"], key="gender",horizontal=True)
     #st.radio("Smoker: ", options=["Yes", "No"], key="smoker", horizontal=True)
 
@@ -74,4 +79,4 @@ with st.form("medical_history_form"):
     if submit:
         st.markdown("## Form Submitted!")
 
-
+# st.write(st.session_state)

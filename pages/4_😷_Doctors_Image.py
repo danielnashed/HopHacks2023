@@ -1,5 +1,5 @@
 
-import numpy as np
+
 import streamlit as st
 import pandas as pd
 import datetime
@@ -9,6 +9,7 @@ import datetime
 from services import llm
 from services import prompts
 import asyncio
+
 
 if "name" not in st.session_state:
     st.session_state.name = ""
@@ -36,6 +37,9 @@ if 'messages' not in st.session_state:
     st.session_state['messages'] = [
         {"role": "system", "content": prompts.startPrompt()}
     ]
+if "report" not in st.session_state:
+    st.session_state.report = ""
+
 st.session_state.name = st.session_state.name
 st.session_state.age = st.session_state.age
 st.session_state.dob = st.session_state.dob
@@ -43,12 +47,11 @@ st.session_state.gender = st.session_state.gender
 st.session_state.smoker = st.session_state.smoker
 st.session_state.med_conditions = st.session_state.med_conditions
 st.session_state.allergies = st.session_state.allergies
-st.session_state.meds =  st.session_state.meds
+st.session_state.meds = st.session_state.meds
 st.session_state.parent_conditions = st.session_state.parent_conditions
 st.session_state.sibling_conditions = st.session_state.sibling_conditions
 st.session_state.grandparent_conditions = st.session_state.grandparent_conditions
 st.session_state.messages = st.session_state.messages
-
 
 sidebar.display()
 
@@ -58,18 +61,28 @@ if 'y' not in st.session_state:
     st.session_state.y = []
 
 
+with st.expander("AI Suggestions", expanded=True):
+    messages = st.session_state.pop("messages")
+    messages = [m for m in messages if m["role"] != "system"]
+    st.session_state.messages = messages
+    st.markdown(f"### Key Valuable Insights")
+    advice = st.empty()
+    if st.session_state.report == "":
+        report = asyncio.run((llm.run_conversation([{"role": "system", "content": prompts.doctorInsightPrompt(st.session_state)}], advice)))
+        st.session_state.report = report[1]['content']
+    else:
+        advice.markdown(st.session_state.report)
+#
 with st.expander("Patient Vitals"):
     path = os.path.join("data","healthkit_data.csv")
     print(os.path.exists(path))
-    dataframe = pd.read_csv(path) 
+    dataframe = pd.read_csv(path)
     st.multiselect(label="", options = list(dataframe.columns)[1:], default = st.session_state.y, key="y")
     st.title("Patient Vitals")
     st.line_chart(
     dataframe,
     x = 'Date',
-    y = st.session_state.y,
-)
-
+    y = st.session_state.y)
 with st.expander("Medical and Family History"):
     st.markdown(f"**Patient:** {st.session_state.name}")
     st.write(f"**Age:** {st.session_state.age}")
@@ -81,18 +94,15 @@ with st.expander("Medical and Family History"):
     st.write(f"**Sibling Medical Conditions:** {', '.join(st.session_state.sibling_conditions)}")
     st.write(f"**Grandparents Medical Conditions:** {', '.join(st.session_state.grandparent_conditions)}")
 
-with st.expander("AI Suggestions"):
-    st.markdown(f"### Key Valuable Insights")
-    advice = st.empty()
-    asyncio.run((llm.run_conversation([{"role": "system", "content": prompts.doctorInsightPrompt()}], advice)))
-#
-# await run_conversation([{"role": "user", "content": user_prompt}], message_placeholder)
-
-with st.expander("Diagnoses/ Comments"):
+with (st.expander("Diagnoses/ Comments")):
     d = st.date_input("Date: ", datetime.datetime.now())
     t = st.time_input('Time:', datetime.datetime.now())
     title = st.text_input('Diagnostic:')
     recomendation = st.text_input('Recommended Treatment and Comments:')
-    st.download_button('Download Report', 'Date: ' + str(d) + '\n\n' + 'Time: ' + str(t)  + '\n\n' + 'Diagnostic: ' + title + '\n\n' + 'Recommended Treatment and Comments: ' + recomendation) 
-    
+    reportContents = 'Date: ' + str(d) + '\n\n' + 'Time: '\
+                       + str(t)  + '\n\n' + 'Diagnostic: ' + title\
+                       + '\n\n' + 'Recommended Treatment and Comments: ' + recomendation\
+                       + "\n\n-------------------REPORT-------------------\n\n"\
+                       + st.session_state.report
 
+    st.download_button('Download Report', reportContents)

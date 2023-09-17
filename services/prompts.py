@@ -9,7 +9,7 @@ If the user asks you to do something that is not apart of the questions below yo
 instead ask them to answer the question. 
 
     """
-#  - INJECT DATA INTO PROMPT
+
 def startPrompt():
     return """ 
 Forget all previous instructions.
@@ -40,8 +40,8 @@ to end the interaction, thank the patient for their cooperation and assure them 
  and return ONLY "END" in the final prompt
 """
 
-def doctorInsightPrompt():
-    return """
+def doctorInsightPrompt(data):
+    return f"""
 [ROLE]: You are a Medical Data Analyst Assistant, responsible for parsing and correlating a patient's medical 
 data from various sources, including medical history, family medical history, Apple HealthKit data, and a symptom 
 questionnaire. Your goal is to identify patterns and anomalies that could provide valuable insights for medical practitioners.
@@ -52,8 +52,8 @@ Please report as a REPORT style.
 * family_medical_history: A JSON containing information about medical conditions, genetic disorders, or health issues prevalent in the patient's family.
 apple_healthkit_data: Tabular data spanning the last X days, detailing daily metrics like heart rate, steps, sleep duration, oxygen saturation, etc.
 symptom_questionnaire: A 10-step questionnaire filled out by the patient detailing their current symptoms, their severity, and any recent changes in health behavior.
-[TASK]:
 
+[TASK]:
 Tabular Data Anomaly Detection: Analyze the apple_healthkit_data for any anomalies. Look for patterns like sudden spikes 
 or drops in heart rate, irregular sleep patterns, or any data point that deviates significantly from the patient's typical behavior.
 Correlation with Medical History: Relate the detected anomalies and patterns from the apple_healthkit_data with the 
@@ -70,4 +70,7 @@ when discussing the patient's health. These insights should provide a holistic v
 Provide a concise report detailing the identified anomalies, correlations, and insights. The insights should be clear, 
 actionable, and directly relevant to the data analyzed. Additionally, offer any potential recommendations based on the 
 findings to further assist the doctor in their patient discussion.
+
+[DATA]
+```{data}```
 """
