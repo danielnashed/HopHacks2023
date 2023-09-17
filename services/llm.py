@@ -13,7 +13,7 @@ async def generate_response(messages):
     try:
         async for chunk in await openai.ChatCompletion.acreate(
                 model=openai_model,
-                temperature=0.9,
+                temperature=0,
                 top_p=0.9,
                 messages=messages,
                 max_tokens=8000,

@@ -6,6 +6,7 @@ from components import sidebar
 from services import prompts
 import asyncio
 from services import llm
+import datetime
 
 
 # Set org ID and API key
@@ -19,6 +20,48 @@ st.set_page_config(
     page_icon="🤕",
     layout="wide"
 )
+
+if "name" not in st.session_state:
+    st.session_state.name = ""
+if "age" not in st.session_state:
+    st.session_state.age = 18
+if "dob" not in st.session_state:
+    st.session_state.dob = datetime.datetime.now()
+if "gender" not in st.session_state:
+    st.session_state.gender = ""
+if "smoker" not in st.session_state:
+    st.session_state.smoker = ""
+if "med_conditions" not in st.session_state:
+    st.session_state.med_conditions = []
+if "allergies" not in st.session_state:
+    st.session_state.allergies = ""
+if "meds" not in st.session_state:
+    st.session_state.meds = ""
+if "parent_conditions" not in st.session_state:
+    st.session_state.parent_conditions = []
+if "sibling_conditions" not in st.session_state:
+    st.session_state.sibling_conditions = []
+if "grandparent_conditions" not in st.session_state:
+    st.session_state.grandparent_conditions = []
+if 'messages' not in st.session_state:
+    st.session_state['messages'] = [
+        {"role": "system", "content": prompts.startPrompt()}
+    ]
+st.session_state.name = st.session_state.name
+st.session_state.age = st.session_state.age
+st.session_state.dob = st.session_state.dob
+st.session_state.gender = st.session_state.gender
+st.session_state.smoker = st.session_state.smoker
+st.session_state.med_conditions = st.session_state.med_conditions
+st.session_state.allergies = st.session_state.allergies
+st.session_state.meds =  st.session_state.meds
+st.session_state.parent_conditions = st.session_state.parent_conditions
+st.session_state.sibling_conditions = st.session_state.sibling_conditions
+st.session_state.grandparent_conditions = st.session_state.grandparent_conditions
+st.session_state.messages = st.session_state.messages
+
+
+
 
 # Sidebar - let user clear the current conversation
 sidebar.display()
@@ -59,6 +102,7 @@ if prompt := st.chat_input("How are you feeling today?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     asyncio.run(chat(st.session_state.messages))
 
+st.write(st.session_state)
 # generate a response
 # def generate_response(prompt):
 #     st.session_state['messages'].append({"role": "user", "content": prompt})
