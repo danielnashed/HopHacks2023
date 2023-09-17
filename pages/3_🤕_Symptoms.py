@@ -9,6 +9,7 @@ from services import llm
 
 
 # Set org ID and API key
+# THESE SHOULD BE IN A .env FILE
 openai.organization = "org-3I5fILcDiX79DQpjuWTbt184"
 openai.api_key = "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"
 
@@ -26,20 +27,14 @@ clear_button = st.sidebar.button("Clear Conversation", key="clear")
 st.markdown("<h1 style='text-align: center;'>Chatbox to share your symptoms.</h1>", unsafe_allow_html=True)
 
 # Initialise session state variables
-# if 'generated' not in st.session_state:
-#     st.session_state['generated'] = []
-# if 'past' not in st.session_state:
-#     st.session_state['past'] = []
 if 'messages' not in st.session_state:
     st.session_state['messages'] = [
-        {"role": "system", "content": prompts.initialRole()}
+        {"role": "system", "content": prompts.startPrompt()}
     ]
 # reset everything
 if clear_button:
-    # st.session_state['generated'] = []
-    # st.session_state['past'] = []
     st.session_state['messages'] = [
-        {"role": "system", "content": prompts.initialRole()}
+        {"role": "system", "content": prompts.startPrompt()}
     ]
 
 
@@ -64,7 +59,6 @@ if prompt := st.chat_input("How are you feeling today?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     asyncio.run(chat(st.session_state.messages))
 
-print(st.session_state.messages)
 # generate a response
 # def generate_response(prompt):
 #     st.session_state['messages'].append({"role": "user", "content": prompt})

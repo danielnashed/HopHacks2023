@@ -11,6 +11,8 @@ st.title("Dashboard")
 if 'y' not in st.session_state:
     st.session_state.y = []
 
+print(st.session_state)
+
 with st.expander("Patient Vitals"):
     path = os.path.join("data","healthkit_data.csv")
     print(os.path.exists(path))
