@@ -1,18 +1,9 @@
-import openai
-import os
 import streamlit as st
-# from streamlit_chat import message
 from components import sidebar
 from services import prompts
 import asyncio
 from services import llm
 import datetime
-
-
-# Set org ID and API key
-# THESE SHOULD BE IN A .env FILE
-openai.organization = "org-3I5fILcDiX79DQpjuWTbt184"
-openai.api_key = "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"
 
 # set page layout
 st.set_page_config(
@@ -61,8 +52,6 @@ st.session_state.grandparent_conditions = st.session_state.grandparent_condition
 st.session_state.messages = st.session_state.messages
 
 
-
-
 # Sidebar - let user clear the current conversation
 sidebar.display()
 clear_button = st.sidebar.button("Clear Conversation", key="clear")
@@ -79,7 +68,6 @@ if clear_button:
     st.session_state['messages'] = [
         {"role": "system", "content": prompts.startPrompt()}
     ]
-
 
 # Print all messages in the session state
 for message in [m for m in st.session_state.messages if m["role"] != "system"]:
