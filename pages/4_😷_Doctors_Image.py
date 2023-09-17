@@ -4,9 +4,11 @@ import streamlit as st
 import pandas as pd
 import datetime
 import os
+from components import sidebar
 
+sidebar.display()
 
-st.title("Dashboard")
+st.title("Overview")
 
 if 'y' not in st.session_state:
     st.session_state.y = []
