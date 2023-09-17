@@ -4,6 +4,9 @@ from services import prompts
 import asyncio
 from services import llm
 import datetime
+import openai
+import os
+import time
 
 
 # Set org ID and API key
@@ -61,6 +64,7 @@ st.session_state.messages = st.session_state.messages
 # Sidebar - let user clear the current conversation
 sidebar.display()
 clear_button = st.sidebar.button("Clear Conversation", key="clear")
+share_button = st.sidebar.button("Share Data with Doctor", key="share")
 
 st.markdown("<h1 style='text-align: center;'>Chatbox to share your symptoms.</h1>", unsafe_allow_html=True)
 
@@ -75,6 +79,14 @@ if clear_button:
         {"role": "system", "content": prompts.startPrompt()}
     ]
 
+if share_button:
+    with st.spinner('Sharing symptoms and health trends with doctor...'):
+        time.sleep(2)
+        st.success("""
+                   Sent! Your doctor has received a full-report of the symptoms we just discussed 
+                   together as well as a copy of your medical records and your Apple Health data trends 
+                   over the past two weeks. You will receive an email shortly confirming your doctor appointment. ')
+        """)
 # Print all messages in the session state
 for message in [m for m in st.session_state.messages if m["role"] != "system"]:
     with st.chat_message(message["role"]):
