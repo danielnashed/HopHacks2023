@@ -1,18 +1,16 @@
-import datetime
+import os.path
+
 import streamlit as st
 from components import sidebar
 from services import medicalForm
+import datetime
 from services import prompts
 
-## PROBLEM LATER -- FIGURE OUT HOW TO NOT UPDATE SESSION STATE WHEN USER CLICKS SUBMIT
 st.set_page_config(
-    page_title="Medical History",
-    page_icon="🧑",
+    page_title="Family Medical History",
+    # page_icon="👪",
     layout="wide"
 )
-
-sidebar.display()
-
 
 #THIS CSS MODIFIES THE COLOR OF TEXT BOXES
 st.markdown("""
@@ -44,10 +42,6 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-
-st.markdown("# Known Medical Conditions")
-
-# If session state does not have the medical history keys, initialize them
 if "name" not in st.session_state:
     st.session_state.name = ""
 if "age" not in st.session_state:
@@ -76,6 +70,7 @@ if 'messages' not in st.session_state:
     ]
 if "report" not in st.session_state:
     st.session_state.report = ""
+
 st.session_state.name = st.session_state.name
 st.session_state.age = st.session_state.age
 st.session_state.dob = st.session_state.dob
@@ -90,25 +85,28 @@ st.session_state.grandparent_conditions = st.session_state.grandparent_condition
 st.session_state.messages = st.session_state.messages
 st.session_state.report = st.session_state.report
 
+
+sidebar.display()
+
+st.markdown("# Known Family Medical History")
+
 # Form
-with st.form("medical_history_form"):
-    st.text_input("Full Name:", value=st.session_state.name, key="name")
-    st.number_input("Age:", value=st.session_state.age, key="age", min_value=0, max_value=150, step=1)
-    st.date_input("Date of Birth:", value=st.session_state.dob, key="dob", format="MM/DD/YYYY",
-                  min_value=datetime.date.today()-datetime.timedelta(days=100*365.25),
-                  max_value=datetime.date.today()+datetime.timedelta(days=100*365.25))
-   # st.radio("Gender: ", options=["Male", "Female", "Other", "Prefer not to say"], key="gender",horizontal=True)
-    #st.radio("Smoker: ", options=["Yes", "No"], key="smoker", horizontal=True)
+with st.form(key="family_med_form"):
 
-    st.multiselect(label="", options=medicalForm.medical_conditions(), default=st.session_state.med_conditions, key="med_conditions",
-                   placeholder="Known medical conditions")
+    st.write("Medical Conditions in Parents:")
+    st.multiselect(label="Parent Conditions", options=medicalForm.medical_conditions(), default=st.session_state.parent_conditions, key="parent_conditions",
+                   placeholder="Known parent medical conditions")
 
-    st.text_area("Allergies:", value=st.session_state.allergies, key="allergies")
-    st.text_input("Current Medications:", value=st.session_state.meds, key="meds")
+    st.write("Medical Conditions in Siblings:")
+    st.multiselect(label="Sibling Conditions", options=medicalForm.medical_conditions(), default=st.session_state.sibling_conditions, key="sibling_conditions",
+                   placeholder="Known sibling medical conditions")
 
+    st.write("Medical Conditions in Grandparents:")
+    st.multiselect(label="Grandparent Conditions", options=medicalForm.medical_conditions(), default=st.session_state.grandparent_conditions, key="grandparent_conditions",
+                   placeholder="Known grandparent medical conditions")
+    # Submit button
     submit = st.form_submit_button("Submit")
-
     if submit:
-        st.markdown("## Form Submitted!")
+        st.write("## Form Submitted!")
 
 # st.write(st.session_state)

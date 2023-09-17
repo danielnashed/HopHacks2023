@@ -5,10 +5,11 @@ import os
 
 st.set_page_config(
 	page_title="Home",
-	page_icon="🏥",
+	# page_icon="🏥",
 	layout="wide"
 )
 
+sidebar.display()
 # Define the HTML and CSS for the first line
 html_first_line = """
 <!DOCTYPE html>
@@ -158,7 +159,8 @@ html_rest_of_content = """
 st.markdown(html_first_line, unsafe_allow_html=True)
 
 #Display the panacea logo
-st.image("static\Logo_Redone.png") 
+
+st.image(os.path.join("static","Logo_Redone.png"))
 
 #Display the rest of the content HTML
 st.markdown(html_rest_of_content, unsafe_allow_html=True)
@@ -179,7 +181,7 @@ for feature, description in features.items():
 st.markdown("<br>", unsafe_allow_html=True)
 
 # Define the file path
-file_path = os.path.join('pages', '1_🧑_Medical_History.py')
+file_path = os.path.join('pages', '1_Medical_History.py')
 
 # Create a button that redirects to the file_path
 redirect_button = f"""

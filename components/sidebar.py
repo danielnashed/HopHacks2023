@@ -4,14 +4,12 @@ def display():
     with st.sidebar:
         # st.title("Navigation")
         st.markdown('''
-            <a href="/" style="color:black;text-decoration: none;">
-                <div style="display:table;margin-top:-16rem;margin-left:0%;">
-                    <img src="/app/static/logo.png" width="30"><span>Medical Assistant</span>
-                    <span style="font-size: 0.8em; color: #080808">&nbsp;&nbsp;v0.1.0</span>
+                <div style="display:table;margin-top:-18.6rem;margin-left:10%;color:black;text-decoration: none;">
+                    <img src="/app/static/logo_noText.png" width="60"><span>    Panacea  </span>
+                    <span style="font-size: 0.8em; color: grey">&nbsp;&nbsp;v0.1.0</span>
                     <br>
-                    <span style="font-size: 0.8em">Welcome to Medical Assistant NAME CHANGE LATER</span>
+                    <span style="font-size: 0.8em">SLOGAN</span>
                 </div>
-            </a>
             <br>
         
         ''', unsafe_allow_html=True)

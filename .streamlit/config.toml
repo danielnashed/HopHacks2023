@@ -6,7 +6,7 @@ textColor = "#ffffff"
 font = "monospace"
 
 [server]
-port = 8502
+port = 4444
 enableStaticServing = true
 
 [browser]

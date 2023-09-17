@@ -17,7 +17,7 @@ openai.organization = os.getenv('OPENAI_API_ORGANIZATION')
 # set page layout
 st.set_page_config(
     page_title="Symptoms",
-    page_icon="🤕",
+    # page_icon="🤕",
     layout="wide"
 )
 
@@ -113,6 +113,11 @@ if clear_button:
         {"role": "system", "content": prompts.startPrompt()}
     ]
 
+# Print all messages in the session state
+for message in [m for m in st.session_state.messages if m["role"] != "system"]:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
 if share_button:
     with st.spinner('Sharing symptoms and health trends with doctor...'):
         time.sleep(2)
@@ -121,11 +126,6 @@ if share_button:
                    together as well as a copy of your medical records and your Apple Health data trends 
                    over the past two weeks. You will receive an email shortly confirming your doctor appointment. ')
         """)
-# Print all messages in the session state
-for message in [m for m in st.session_state.messages if m["role"] != "system"]:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
 # Chat with the LLM, and update the messages list with the response, updating UI
 async def chat(messages):
     with st.chat_message("user"):
