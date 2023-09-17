@@ -7,7 +7,7 @@ system_prompt = "### System:\nYou are StableBeluga, an AI that follows instructi
 
 message = "Write me a poem please"
 prompt = f"{system_prompt}### User: {message}\n\n### Assistant:\n"
-inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
+inputs = tokenizer(prompt, return_tensors="pt")
 output = model.generate(**inputs, do_sample=True, top_p=0.95, top_k=0, max_new_tokens=256)
 
 print(tokenizer.decode(output[0], skip_special_tokens=True))
