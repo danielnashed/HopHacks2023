@@ -75,4 +75,3 @@ with st.form("medical_history_form"):
         st.markdown("## Form Submitted!")
 
 
-st.write(st.session_state)

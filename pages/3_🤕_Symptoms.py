@@ -102,7 +102,6 @@ if prompt := st.chat_input("How are you feeling today?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     asyncio.run(chat(st.session_state.messages))
 
-st.write(st.session_state)
 # generate a response
 # def generate_response(prompt):
 #     st.session_state['messages'].append({"role": "user", "content": prompt})

@@ -85,4 +85,3 @@ with st.form(key="family_med_form"):
     submit = st.form_submit_button("Submit")
     if submit:
         st.write("## Form Submitted!")
-st.write(st.session_state)
