@@ -7,10 +7,10 @@ from services import prompts
 import asyncio
 from services import llm
 
-
 # Set org ID and API key
-openai.organization = "org-3I5fILcDiX79DQpjuWTbt184"
-openai.api_key = "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"
+openai_model = os.getenv('OPENAI_API_MODEL')
+openai.api_key = os.getenv('OPENAI_API_KEY')
+openai.organization = os.getenv('OPENAI_API_ORGANIZATION')
 
 # set page layout
 st.set_page_config(
