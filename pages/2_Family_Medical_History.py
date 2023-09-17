@@ -34,10 +34,10 @@ if "sibling_conditions" not in st.session_state:
     st.session_state.sibling_conditions = []
 if "grandparent_conditions" not in st.session_state:
     st.session_state.grandparent_conditions = []
-if 'messages' not in st.session_state:
-    st.session_state['messages'] = [
-        {"role": "system", "content": prompts.startPrompt()}
-    ]
+# if 'messages' not in st.session_state:
+#     st.session_state['messages'] = [
+#         {"role": "system", "content": prompts.startPrompt()}
+#     ]
 if "report" not in st.session_state:
     st.session_state.report = ""
 
@@ -52,7 +52,7 @@ st.session_state.meds =  st.session_state.meds
 st.session_state.parent_conditions = st.session_state.parent_conditions
 st.session_state.sibling_conditions = st.session_state.sibling_conditions
 st.session_state.grandparent_conditions = st.session_state.grandparent_conditions
-st.session_state.messages = st.session_state.messages
+# st.session_state.messages = st.session_state.messages
 st.session_state.report = st.session_state.report
 
 
