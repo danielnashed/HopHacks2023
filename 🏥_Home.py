@@ -9,7 +9,7 @@ st.set_page_config(
 	layout="wide"
 )
 
-import streamlit as st
+logo_relative_path = "static/Logo_Redone.png"
 
 # Define the HTML and CSS
 html_code = """
@@ -116,6 +116,9 @@ html_code = """
     <span>Hello. I am </span><span class="title">Panacea.</span>
   </div>
 
+  <!-- Add an image with the <img> tag -->
+  <img src=logo_relative_path alt="Panacea Logo" style="display: block; margin: 20px auto; max-width: 100%; height: auto;">
+
   <div class="subheading center">
     An AI Designed Specifically to Help You.
   </div><br>
@@ -175,7 +178,7 @@ file_path = os.path.join('pages', '1_🧑_Medical_History.py')
 # Create a button that redirects to the file_path
 redirect_button = f"""
     <button onclick="window.location.href='{file_path}'" 
-            style="color: white; background-color: #E01A4F; font-size: 20px; font-family: monospace; padding: 10px 20px; text-align: center; display: block; margin: 0 auto; cursor: pointer;">
+        style="color: white; background-color: #E01A4F; font-size: 20px; font-family: monospace; padding: 10px 20px; text-align: center; display: block; margin: 0 auto; cursor: pointer;">
         Try It
     </button>
 """
