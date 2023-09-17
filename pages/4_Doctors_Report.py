@@ -10,6 +10,11 @@ from services import llm
 from services import prompts
 import asyncio
 
+st.set_page_config(
+    page_title="Doctors Report",
+    # page_icon="🤕",
+    layout="wide"
+)
 
 if "name" not in st.session_state:
     st.session_state.name = ""
@@ -67,7 +72,7 @@ with st.expander("AI Suggestions", expanded=True):
     st.session_state.messages = messages
     st.markdown(f"### Key Valuable Insights")
     advice = st.empty()
-    if st.session_state.report == "":
+    if st.session_state.report == "" and len(st.session_state.messages) > 1:
         report = asyncio.run((llm.run_conversation([{"role": "system", "content": prompts.doctorInsightPrompt(st.session_state)}], advice)))
         st.session_state.report = report[1]['content']
     else:
