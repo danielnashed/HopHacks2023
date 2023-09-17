@@ -9,10 +9,8 @@ st.set_page_config(
 	layout="wide"
 )
 
-import streamlit as st
-
-# Define the HTML and CSS
-html_code = """
+# Define the HTML and CSS for the first line
+html_first_line = """
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,10 +22,20 @@ html_code = """
       text-align: center;
       color: white;
     }
+  </style>
+</head>
+<body>
+  <!-- HTML Content for the first line -->
+  <div class="title center">
+    <span>Hello. I am</span>
+  </div>
+"""
 
-    .title span {
-      color: orange; /* Word Panacea in orange */
-    }
+# Define the HTML and CSS for the rest of the content
+html_rest_of_content = """
+<head>
+  <style>
+    /* CSS Styles */
 
     .subheading {
       font-size: 60px; /* Almost as big as the title */
@@ -110,12 +118,7 @@ html_code = """
     }
   </style>
 </head>
-<body>
-  <!-- HTML Content -->
-  <div class="title center">
-    <span>Hello. I am </span><span class="title">Panacea.</span>
-  </div>
-
+  <!-- Rest of your HTML content (subheading, body text, etc.) -->
   <div class="subheading center">
     An AI Designed Specifically to Help You.
   </div><br>
@@ -151,8 +154,14 @@ html_code = """
 </html>
 """
 
-# Display the HTML
-st.markdown(html_code, unsafe_allow_html=True)
+#Display the first line HTML
+st.markdown(html_first_line, unsafe_allow_html=True)
+
+#Display the panacea logo
+st.image("static\Logo_Redone.png") 
+
+#Display the rest of the content HTML
+st.markdown(html_rest_of_content, unsafe_allow_html=True)
 
 # Define the key features and their descriptions
 features = {
@@ -175,7 +184,7 @@ file_path = os.path.join('pages', '1_🧑_Medical_History.py')
 # Create a button that redirects to the file_path
 redirect_button = f"""
     <button onclick="window.location.href='{file_path}'" 
-            style="color: white; background-color: #E01A4F; font-size: 20px; font-family: monospace; padding: 10px 20px; text-align: center; display: block; margin: 0 auto; cursor: pointer;">
+        style="color: white; background-color: #E01A4F; font-size: 20px; font-family: monospace; padding: 10px 20px; text-align: center; display: block; margin: 0 auto; cursor: pointer;">
         Try It
     </button>
 """
